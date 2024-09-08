@@ -1,24 +1,23 @@
-# README
+### Installation
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- copy .env.development.example
+```
+$ cp .env.development.example .env.example
+```
 
-Things you may want to cover:
+-  copy docker-compose.yml.example
+```
+$ cp docker-compose.yml.example docker-compose.yml
+```
 
-* Ruby version
+- Start building docker
+```
+$ docker-compose build
+```
 
-* System dependencies
+- Launch app
+```
+$ docker-compose up
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Open app on browser with url `http://0.0.0.0:3000/`
