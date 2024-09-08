@@ -2,7 +2,7 @@
 
 - copy .env.development.example
 ```
-$ cp .env.development.example .env.example
+$ cp .env.development.example .env.development
 ```
 
 -  copy docker-compose.yml.example
