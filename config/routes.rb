@@ -7,4 +7,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # We build api with version from the start in case of using multiple versions in the future.
+  namespace :api do
+    namespace :v1 do
+      resources :categories
+    end
+  end
 end
