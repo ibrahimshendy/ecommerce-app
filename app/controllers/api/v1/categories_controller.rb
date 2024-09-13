@@ -4,7 +4,7 @@ class Api::V1::CategoriesController < ApplicationController
   # GET /categories or /categories.json
   def index
     render json: {
-      data: Category.all
+      data: Category.active.sorted.all
     }
   end
 
@@ -60,6 +60,6 @@ class Api::V1::CategoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def category_params
-    params.require(:category).permit(:name, :slug, :description, :status)
+    params.require(:category).permit(:name, :slug, :description, :status, :sort)
   end
 end
