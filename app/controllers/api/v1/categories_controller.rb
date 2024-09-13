@@ -10,6 +10,9 @@ class Api::V1::CategoriesController < ApplicationController
 
   # GET /categories/1 or /categories/1.json
   def show
+    render json: {
+      data: @category
+    }
   end
 
   def create
@@ -29,29 +32,30 @@ class Api::V1::CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
-    respond_to do |format|
       if @category.update(category_params)
-        format.json { render :show, status: :ok, location: @category }
+        render json: { data: @category, status: :ok }
       else
-        format.json { render json: @category.errors, status: :unprocessable_entity }
+        render status: 400, json: {
+          errors: @category.errors
+        }
       end
-    end
   end
 
   # DELETE /categories/1 or /categories/1.json
   def destroy
     @category.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    render json: { status: :ok, message: "Category successfully destroyed" }
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_category
-    @category = Category.find(params[:id])
+    unless (@category = Category.where(id: params[:id]).first)
+      render status: 404, json: {
+        message: "This category not found"
+      }
+    end
   end
 
   # Only allow a list of trusted parameters through.
