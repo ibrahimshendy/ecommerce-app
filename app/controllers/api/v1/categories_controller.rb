@@ -19,12 +19,11 @@ class Api::V1::CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      render json: {
+      render status: 201, json: {
         data: @category,
-        status: :created,
       }
     else
-      render status: 400, json: {
+      render status: 422, json: {
         errors: @category.errors
       }
     end
@@ -33,7 +32,7 @@ class Api::V1::CategoriesController < ApplicationController
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
       if @category.update(category_params)
-        render json: { data: @category, status: :ok }
+        render json: { data: @category }
       else
         render status: 400, json: {
           errors: @category.errors
@@ -45,7 +44,7 @@ class Api::V1::CategoriesController < ApplicationController
   def destroy
     @category.destroy!
 
-    render json: { status: :ok, message: "Category successfully destroyed" }
+    render json: {message: "Category successfully destroyed" }
   end
 
   private
