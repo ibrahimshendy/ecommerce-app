@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  after_save :invalidate_cache
+
   belongs_to :category
 
   STATUSES = %w[active inactive deleted]
@@ -12,4 +14,7 @@ class Product < ApplicationRecord
   validates :sort, numericality: { only_integer: true, greater_than: -1 }
 
 
+  def invalidate_cache
+    Rails.cache.delete("list_of_products")
+  end
 end
