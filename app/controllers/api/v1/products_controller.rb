@@ -1,18 +1,18 @@
 class Api::V1::ProductsController < ApplicationController
   before_action :find_product, only: %i[ show update destroy]
   def index
-    render json: {data: Product.includes(:category).all }, include: [:category]
+    render json: Product.includes([:category]).all
   end
 
   def show
-    render json: {data: @product}, include: [:category]
+    render json: @product
   end
 
   def create
     @product = Product.new(product_params)
 
     if @product.save
-      render status: 201, json: {data: @product}
+      render status: 201, json: @product
     else
       render status: 422, json: {errors: @product.errors}
     end
@@ -22,7 +22,7 @@ class Api::V1::ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      render status: 200, json: {data: @product}
+      render status: 200, json: @product
     else
       render status: 422, json: {errors: @product.errors}
     end

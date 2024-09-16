@@ -3,25 +3,23 @@ class Api::V1::CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    render json: {
-      data: Category.active.sorted.all
-    }
+    render json: Category.active.sorted.all
   end
 
   # GET /categories/1 or /categories/1.json
   def show
-    render json: {
-      data: @category
-    }
+    render json: @category
+
+    # render json: {
+    #   data: @category
+    # }
   end
 
   def create
     @category = Category.new(category_params)
 
     if @category.save
-      render status: 201, json: {
-        data: @category,
-      }
+      render status: 201, json: @category
     else
       render status: 422, json: {
         errors: @category.errors
@@ -32,7 +30,7 @@ class Api::V1::CategoriesController < ApplicationController
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
       if @category.update(category_params)
-        render json: { data: @category }
+        render json: @category
       else
         render status: 400, json: {
           errors: @category.errors
