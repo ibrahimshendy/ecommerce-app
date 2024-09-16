@@ -1,7 +1,11 @@
 class Api::V1::ProductsController < ApplicationController
   before_action :find_product, only: %i[ show update destroy]
   def index
-    render json: Product.includes([:category]).all
+    @products = Rails.cache.fetch("list_of_products", expires_in: 2.minutes) do
+      Product.includes([:category]).all.to_a
+    end
+
+    render json: @products
   end
 
   def show
