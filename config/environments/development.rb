@@ -77,4 +77,6 @@ Rails.application.configure do
 
   config.debug_exception_response_format = :api
 
+  config.action_mailer.default_url_options = { host: '0.0.0.0', port: 3000 }
+
 end
