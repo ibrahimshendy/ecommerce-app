@@ -15,6 +15,24 @@ services:
     ports:
       - "6371:6379"
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=0.0.0.0
+      - node.name=elasticsearch-ecommerce
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ecommerce_elasticsearch_storage:/usr/share/elasticsearch/data
+    ports:
+      - 9600:9200
+
   app:
     build:
       context: .
@@ -27,6 +45,8 @@ services:
     depends_on:
       - redis
       - db
+      - elasticsearch
 
 volumes:
   ruby_db: {}
+  ecommerce_elasticsearch_storage: {}
