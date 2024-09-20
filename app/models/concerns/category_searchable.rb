@@ -10,18 +10,27 @@ module CategorySearchable
 
     mappings do
       indexes :id, :type => 'integer'
-      indexes :slug, :type => 'text', analyzer: 'trigram'
+      indexes :slug, :type => 'keyword'
       indexes :name, :type => 'text', analyzer: 'trigram'
       indexes :description, :type => 'text', analyzer: 'trigram'
     end
 
     def as_indexed_json(options={})
-      {
-        :id => self.id,
-        :name => self.name,
-        :slug => self.slug,
-        :description => self.description,
-      }.as_json()
+      self.as_json( only: [:id, :name, :slug, :description] )
+    end
+
+    def self.search(query)
+      self.__elasticsearch__.search(
+        {
+          query: {
+            multi_match: {
+              query: query,
+              fields: %w[name^5 description]
+            }
+          },
+          # more blocks will go IN HERE. Keep reading!
+        }
+      ).records.to_a
     end
   end
 end
