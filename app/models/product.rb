@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  include ProductSearchable
+
   after_save :invalidate_cache
 
   belongs_to :category

@@ -14,6 +14,11 @@ namespace :elasticsearch do
       Category.import batch_size: ENV['batch_size'].to_i || 100
     end
 
+    if model === "product"
+      puts "Start importing #{model} ....."
+      Product.import batch_size: ENV['batch_size'].to_i || 100
+    end
+
     puts "#{model} was imported successfully"
   end
 end
