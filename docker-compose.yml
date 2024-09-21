@@ -33,6 +33,15 @@ services:
     ports:
       - 9600:9200
 
+  sidekiq:
+    build: .
+    command: "bundle exec sidekiq -C config/sidekiq.yml"
+    depends_on:
+      - redis
+      - db
+    env_file:
+      - .env.development
+
   app:
     build:
       context: .
@@ -46,6 +55,7 @@ services:
       - redis
       - db
       - elasticsearch
+      - sidekiq
 
 volumes:
   ruby_db: {}
