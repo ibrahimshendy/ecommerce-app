@@ -39,7 +39,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -78,6 +78,24 @@ Rails.application.configure do
 
   config.debug_exception_response_format = :api
 
-  config.action_mailer.default_url_options = { host: '0.0.0.0', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:         ENV["MAIL_HOST"],
+    port:            ENV["MAIL_PORT"],
+    domain:          ENV["MAIL_DOMAIN"],
+    user_name:       ENV["MAIL_USERNAME"],
+    password:        ENV["MAIL_PASSWORD"],
+    authentication:  'plain',
+    enable_starttls: true,
+    open_timeout:    5,
+    read_timeout:    5
+  }
+
+  config.action_mailer.default_url_options    = { host: '0.0.0.0', port: 3000 }
+  config.action_mailer.perform_deliveries     = true
+  config.action_mailer.default_options = {
+    from:       ENV["DEFAULT_SENDER_EMAIL"],
+    name:       ENV["DEFAULT_SENDER_NAME"]
+  }
 
 end

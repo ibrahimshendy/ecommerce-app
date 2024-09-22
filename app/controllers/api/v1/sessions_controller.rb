@@ -7,6 +7,8 @@ class Api::V1::SessionsController < Devise::SessionsController
     @token = request.env['warden-jwt_auth.token']
     headers['Authorization'] = @token
 
+    LoginAttemptMailer.with(user: resource).success_attempt.deliver_later
+
     render json: { token: @token }, status: :ok
   end
 
