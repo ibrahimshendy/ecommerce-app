@@ -1,0 +1,3 @@
+shared:
+  pagination:
+    limit: 5
