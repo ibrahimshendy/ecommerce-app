@@ -1,12 +1,12 @@
 class Api::V1::CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show update destroy ]
 
-  # GET /categories or /categories.json
+  # GET /categories
   def index
-    render json: Category.active.sorted.all
+    render json: CategoryService.api_filter(params[:category])
   end
 
-  # GET /categories/1 or /categories/1.json
+  # GET /categories/1
   def show
     render json: @category
 
