@@ -19,6 +19,15 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :categories
       resources :products
+
+      scope :carts do
+        resources :items, controller: :cart_items
+      end
+
+      get 'carts', to: 'carts#index', as: 'show_cart'
+      put 'carts', to: 'carts#update', as: 'update_cart'
+      delete 'carts', to: 'carts#destroy', as: 'destroy_cart'
+
     end
   end
 end
