@@ -9,5 +9,7 @@ class CreateCartItems < ActiveRecord::Migration[7.1]
 
     add_foreign_key :cart_items, :carts, column: :cart_id
     add_foreign_key :cart_items, :products, column: :product_id
+
+    add_index :cart_items, [:product_id, :cart_id], unique: true
   end
 end
