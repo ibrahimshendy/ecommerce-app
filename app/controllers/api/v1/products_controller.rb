@@ -23,9 +23,7 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def update
-    @product = Product.new(product_params)
-
-    if @product.save
+    if @product.update(product_params)
       render status: 200, json: @product
     else
       render status: 422, json: {errors: @product.errors}
