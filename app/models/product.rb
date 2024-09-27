@@ -26,12 +26,12 @@ class Product < ApplicationRecord
     return unless image.attached?
 
     unless image.blob.byte_size <= 1.megabyte
-      errors.add(:image, "is too big")
+      errors.add(:image, :invalid_size)
     end
 
-    acceptable_types = ["image/jpeg", "image/png"]
+    acceptable_types = %w[image/jpeg image/png image/jpg image/gif image/bmp]
     unless acceptable_types.include?(image.content_type)
-      errors.add(:image, "must be a JPEG or PNG")
+      errors.add(:image, :invalid_type)
     end
   end
 end

@@ -29,3 +29,13 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    errors:
+      models:
+        product:
+          attributes:
+            image:
+              invalid_type: "The image field must be a JPEG, PNG, JPG, GIF OR BMP"
+              invalid_size: "The allowed max image size is 1 MB"
+
