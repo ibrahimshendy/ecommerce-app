@@ -86,3 +86,5 @@ group :test do
 end
 
 gem "sidekiq", "~> 7.3"
+
+gem "aws-sdk-s3", require: false

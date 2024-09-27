@@ -2,7 +2,7 @@ class Api::V1::ProductsController < ApplicationController
   before_action :find_product, only: %i[ show update destroy]
   def index
     @products = Rails.cache.fetch("list_of_products", expires_in: 2.minutes) do
-      Product.includes([:category]).all.to_a
+      Product.includes([:category, :image_attachment]).all.to_a
     end
 
     render json: @products
@@ -38,7 +38,7 @@ class Api::V1::ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:category_id, :name, :price, :quantity, :description, :sort, :status)
+    params.require(:product).permit(:category_id, :name, :price, :quantity, :description, :image, :sort, :status)
   end
 
   def find_product

@@ -35,5 +35,6 @@
 /config/master.key
 
 /config/credentials/production.key
+/config/credentials.yml.enc
 
 .idea/*
