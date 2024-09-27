@@ -1,18 +1,15 @@
 class Api::V1::CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show update destroy ]
+  skip_before_action :authenticate_user!, only: %i[ index show ]
 
-  # GET /categories
+  # GET /api/v1/categories
   def index
     render json: CategoryService.api_filter(params[:category])
   end
 
-  # GET /categories/1
+  # GET /api/v1/categories/1
   def show
     render json: @category
-
-    # render json: {
-    #   data: @category
-    # }
   end
 
   def create
@@ -27,7 +24,7 @@ class Api::V1::CategoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /categories/1 or /categories/1.json
+  # PATCH/PUT /api/v1/categories/{id}
   def update
       if @category.update(category_params)
         render json: @category
@@ -38,7 +35,7 @@ class Api::V1::CategoriesController < ApplicationController
       end
   end
 
-  # DELETE /categories/1 or /categories/1.json
+  # DELETE /categories/{id}
   def destroy
     @category.destroy!
 

@@ -1,5 +1,7 @@
 class Api::V1::ProductsController < ApplicationController
   before_action :find_product, only: %i[ show update destroy]
+  skip_before_action :authenticate_user!, only: %i[ index show ]
+
   def index
     @products = Rails.cache.fetch("list_of_products", expires_in: 2.minutes) do
       Product.includes([:category, :image_attachment]).all.to_a
