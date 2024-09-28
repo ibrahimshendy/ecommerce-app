@@ -4,7 +4,7 @@ class Api::V1::ProductsController < ApplicationController
 
   def index
     @products = Rails.cache.fetch("list_of_products", expires_in: 2.minutes) do
-      Product.includes([:category, :image_attachment]).all.to_a
+      Product.includes([:category, :image_attachment => [:blob]]).all.to_a
     end
 
     render json: @products
