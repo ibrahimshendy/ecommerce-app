@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "home#index"
+
   devise_for :users, defaults: { format: :json }, path: '', path_names: {
     sign_in: 'api/v1/login', sign_out: 'api/v1/logout', registration: 'api/v1/signup'
   },
@@ -29,5 +30,14 @@ Rails.application.routes.draw do
       delete 'carts', to: 'carts#destroy', as: 'destroy_cart'
 
     end
+  end
+
+  devise_for :admins, path: 'admin', path_names: { sign_in: 'login', sign_out: 'logout'},
+    controllers: {
+      sessions: 'admin/sessions'
+    }
+
+  namespace :admin do
+    get "dashboard", to: "dashboard#index"
   end
 end

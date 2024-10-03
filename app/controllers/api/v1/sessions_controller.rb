@@ -1,8 +1,13 @@
 class Api::V1::SessionsController < Devise::SessionsController
   respond_to :json
+  before_action :configure_sign_in_params, only: [:create]
+
+  protected
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:user, keys: [:email, :password])
+  end
 
   private
-
   def respond_with(resource, _opts = {})
     @token = request.env['warden-jwt_auth.token']
     headers['Authorization'] = @token

@@ -1,4 +1,4 @@
-class Api::V1::CartItemsController < ApplicationController
+class Api::V1::CartItemsController < Api::BaseController
   def index
     render json: cart.items.includes(:product), root: "items"
   end

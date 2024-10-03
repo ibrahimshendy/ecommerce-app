@@ -1,0 +1,9 @@
+<h4>
+  Welcome to admin control panel
+</h4>
+<% if admin_signed_in? %>
+  <div> Welcome <%= current_admin.email %> </div>
+  <%= button_to "Sign out", destroy_admin_session_path, method: :delete %>
+<% else %>
+  <%= button_to "Sign in", new_admin_session_path %>
+<% end %>

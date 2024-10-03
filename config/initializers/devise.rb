@@ -16,6 +16,11 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'd1e872838f516462a936bdd7f93c7bf2ecd03b2e90cd56db9eb97ed63b12b46a2881c051e767c88404d13314433077fad0fb18b7f3a8586bb31d66b460ed995e'
 
+  config.warden do |manager|
+    manager.scope_defaults :user, store: false
+    manager.scope_defaults :admin, store: true
+  end
+
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -97,7 +102,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth, :token_auth, :params_auth]
+  config.skip_session_storage = [:http_auth] #[:http_auth, :token_auth, :params_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -264,7 +269,7 @@ Devise.setup do |config|
   #
   # The "*/*" below is required to match Internet Explorer requests.
   # We changed that to empty because we used for API only.
-  config.navigational_formats = [] # '*/*', :html, :turbo_stream
+  # config.navigational_formats = ['*/*', :html, :turbo_stream, :json] # '*/*', :html, :turbo_stream
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
