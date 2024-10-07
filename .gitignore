@@ -38,3 +38,5 @@
 /config/credentials.yml.enc
 
 .idea/*
+
+node_modules
