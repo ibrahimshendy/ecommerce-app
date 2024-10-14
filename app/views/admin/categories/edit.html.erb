@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Edit category <%= @category.name %></h5>
+      </div>
+      <%= form_with model: [:admin, @category] do |form| %>
+        <div class="card-body">
+          <div class="mb-3">
+            <%= form.label :name, "Name" %>
+            <%= form.text_field :name, class: "form-control" %>
+            <% @category.errors.full_messages_for(:name).each do |message| %>
+              <div class="text-danger"><%= message %></div>
+            <% end %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :slug, "Slug" %>
+            <%= form.text_field :slug, class: "form-control" %>
+            <% @category.errors.full_messages_for(:slug).each do |message| %>
+              <div class="text-danger"><%= message %></div>
+            <% end %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :description, "Description" %>
+            <%= form.text_area :description, class: "form-control" %>
+            <% @category.errors.full_messages_for(:description).each do |message| %>
+              <div class="text-danger"><%= message %></div>
+            <% end %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :status, "Status" %>
+            <select name="category[status]" class="form-select">
+              <% ["active", "inactive", "deleted"].each do | status | %>
+                <option value="<%= status %>" <%= @category.status == status ? 'selected' : '' %>><%= status %></option>
+              <% end %>
+            </select>
+            <% @category.errors.full_messages_for(:status).each do |message| %>
+              <div class="text-danger"><%= message %></div>
+            <% end %>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <%= form.submit 'save', class: 'btn btn-primary'%>
+          <%= link_to 'cancel', admin_categories_path, class: 'btn btn-default' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
