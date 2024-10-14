@@ -15,9 +15,9 @@
         </a>
       </li>
 
-      <li class="sidebar-item <%= request.path == admin_categories_path ? 'active' : '' %>">
+      <li class="sidebar-item <%= current_active_path?('admin/categories') ? 'active' : '' %>">
         <a class="sidebar-link" href="<%= admin_categories_path %>">
-          <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Categories</span>
+          <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Categories </span>
         </a>
       </li>
       
