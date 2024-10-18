@@ -62,7 +62,10 @@ Rails.application.configure do
   config.active_job.verbose_enqueue_logs = true
 
   # Suppress logger output for asset requests.
-  config.assets.quiet = true
+  config.assets.quiet = false
+
+  config.assets.debug = false
+  config.assets.logger = false
 
   config.assets.css_compressor = :sass
   # config.assets.js_compressor = :uglifier
