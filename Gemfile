@@ -66,7 +66,9 @@ gem 'elasticsearch-rails'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
+  gem 'rspec-rails', '~> 7.0.0'
+  gem 'fabrication'
+  gem "json_matchers"
 end
 
 group :development do

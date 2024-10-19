@@ -13,7 +13,8 @@ module Filterable
     end
 
     def self.filter(params = {})
-      limit = params[:limit].present? ? params[:limit].to_i : Rails.application.config_for(:default)[:pagination][:limit]
+      params  = params.nil? ? {} : params
+      limit   = params[:limit].present? ? params[:limit].to_i : Rails.application.config_for(:default)[:pagination][:limit]
 
       self.when(params[:id].present?, -> { self.where(id: params[:id].to_i) })
           .when(params[:sort].present?, -> { self.order(sort: params[:sort].to_s.downcase) })

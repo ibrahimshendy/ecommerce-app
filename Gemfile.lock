@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/faker-ruby/faker.git
-  revision: 7ab4a7504ab16eba7829a257189c8140da18b47a
-  branch: main
-  specs:
-    faker (3.4.2)
-      i18n (>= 1.8.11, < 2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -140,6 +132,7 @@ GEM
     devise-jwt (0.12.1)
       devise (~> 4.0)
       warden-jwt_auth (~> 0.10)
+    diff-lcs (1.5.1)
     dotenv (3.1.2)
     dotenv-rails (3.1.2)
       dotenv (= 3.1.2)
@@ -168,6 +161,7 @@ GEM
       hashie
     elasticsearch-rails (8.0.0)
     erubi (1.13.0)
+    fabrication (2.31.0)
     faraday (2.11.0)
       faraday-net_http (>= 2.0, < 3.4)
       logger
@@ -196,6 +190,9 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
+    json_matchers (0.11.1)
+      json_schema
+    json_schema (0.21.0)
     jsonapi-deserializable (0.2.0)
     jsonapi-parser (0.1.1)
     jsonapi-rails (0.4.1)
@@ -312,6 +309,23 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.3.7)
+    rspec-core (3.13.2)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (7.0.1)
+      actionpack (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.1)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -393,9 +407,10 @@ DEPENDENCIES
   dotenv-rails
   elasticsearch-model
   elasticsearch-rails
-  faker!
+  fabrication
   importmap-rails
   jbuilder
+  json_matchers
   jsonapi-rails
   pg (~> 1.1)
   puma (>= 5.0)
@@ -403,6 +418,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.1.3, >= 7.1.3.3)
   redis (>= 4.0.1)
+  rspec-rails (~> 7.0.0)
   sassc-rails
   selenium-webdriver
   sidekiq (~> 7.3)
